@@ -82,12 +82,25 @@ namespace Lab2
         {
             TextBox.Text = StrBuilder.ToString();
         }
+
+        private void FillTextBox(List<Student> students)
+        {
+            foreach (var stud in students)
+            {
+                TextBox.Text += $"First Name: {stud.FirstName}\n" +
+                                $"Last Name: {stud.LastName}\n" +
+                                $"Faculty: {stud.Faculty}\n" +
+                                $"Specialization: {stud.Specialization}\n" +
+                                $"Course: {stud.Course}\n" +
+                                $"Room: {stud.Room}\n" +
+                                $"When checked into: {stud.WhenCheckedInto}\n\n\n";
+            }
+        }
         
         private void SearchBtn_Click(object sender, EventArgs e)
         {
             _comboBoxes = new List<ComboBox>(){comBoxFn, comBoxLn, comBoxFac, comBoxSpec, comBoxCourse, comBoxRoom, comBoxCheckIn};
             var checkBoxes = new List<CheckBox> {FNchB, LNchB, FACchB, SPECchB, CRSchB, RMchB, CHINchB};
-            var checkedBoxes = new List<string>();
             var checkedComboBoxes = new List<ComboBox>();
             var student = new Student();
             PropertyInfo[] propertyInfos = typeof(Student).GetProperties();
@@ -116,16 +129,7 @@ namespace Lab2
             }
 
             List<Student> students = analyser.Analyse(student);
-            foreach (var stud in students)
-            {
-                TextBox.Text += $"First Name: {stud.FirstName}\n" +
-                                $"Last Name: {stud.LastName}\n" +
-                                $"Faculty: {stud.Faculty}\n" +
-                                $"Specialization: {stud.Specialization}\n" +
-                                $"Course: {stud.Course}\n" +
-                                $"Room: {stud.Room}\n" +
-                                $"When checked into: {stud.WhenCheckedInto}\n\n\n";
-            }
+            FillTextBox(students);
             CreateXmlFromChosen(students);
         }
 

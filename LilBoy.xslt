@@ -3,9 +3,9 @@
     <xsl:output method="html" indent="yes"/>
 
     <xsl:template match="/">
-		<html>
+		<html lang="en">
 			<body>
-				<p><h2>Students in dormitory list</h2></p>
+				<h2>Students in dormitory list</h2>
 				<table border="2">
 					<tr>
 						<th>FirstName</th>

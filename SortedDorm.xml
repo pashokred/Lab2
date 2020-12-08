@@ -1,12 +1,3 @@
 <Dormitory>
-  <Student FirstName="Pavlo" LastName="Redko" Faculty="Computer Science and Cybernetics" Specialization="Computer Science" Course="Second" Room="833/2" WhenCheckedInto="09.2019" />
-  <Student FirstName="Yuriy" LastName="Poberezhnyi" Faculty="Computer Science and Cybernetics" Specialization="Computer Science" Course="Second" Room="233/2" WhenCheckedInto="02.2020" />
-  <Student FirstName="Olexandr" LastName="Marchuk" Faculty="Computer Science and Cybernetics" Specialization="Computer Science" Course="Second" Room="233/2" WhenCheckedInto="09.2019" />
-  <Student FirstName="Illya" LastName="Barancev" Faculty="Informational Technologies" Specialization="Software Engineering" Course="Second" Room="833/2" WhenCheckedInto="09.2019" />
-  <Student FirstName="Olexandr" LastName="Koshuba" Faculty="Computer Science and Cybernetics" Specialization="Computer Science" Course="Second" Room="0" WhenCheckedInto="11.2020" />
-  <Student FirstName="Kateryna" LastName="Andrushko" Faculty="Geography" Specialization="Meteorology" Course="Second" Room="353" WhenCheckedInto="09.2019" />
-  <Student FirstName="Mariya" LastName="Shvec" Faculty="Chemistry" Specialization="Chemistry" Course="Second" Room="324" WhenCheckedInto="09.2019" />
-  <Student FirstName="Roman" LastName="Semenchuk" Faculty="Chemistry" Specialization="Chemistry" Course="Second" Room="241" WhenCheckedInto="11.2019" />
-  <Student FirstName="Denys" LastName="Fedorovych" Faculty="Physics" Specialization="Physics" Course="Second" Room="743" WhenCheckedInto="09.2019" />
-  <Student FirstName="Rustem" LastName="Magnitskiy" Faculty="Informational Technologies" Specialization="Computer Science" Course="Second" Room="514" WhenCheckedInto="10.2019" />
+  <Student FirstName="Andriy" LastName="Fonar" Faculty="Computer Science and Cybernetics" Specialization="Computer Science" Course="First" Room="803/3" WhenCheckedInto="09.2020" />
 </Dormitory>
