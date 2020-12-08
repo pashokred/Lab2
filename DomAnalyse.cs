@@ -14,6 +14,8 @@ namespace Lab2
             GetElementsByTagName(tag, dorm);
         }
         
+        
+        
         private static void RecurseNodes(XmlNode node)
         {
             var sb = new StringBuilder();
@@ -29,8 +31,6 @@ namespace Lab2
                 level, node.NodeType, node.Name);
             foreach (XmlAttribute attr in node.Attributes)
             {
-                if(attr.Name == "FirstName" && attr.Value == Dorm.FirstName)
-                    
                 sb.AppendFormat("{0}={1} ", attr.Name, attr.Value);
             }
             sb.AppendLine();
@@ -47,7 +47,7 @@ namespace Lab2
             return Path.Combine(GetFilePath("Dormitory.xml"), fileName);
         }
 
-        private static void GetElementsByTagName(string tag, Dormitory dorm)
+        private static StringBuilder GetElementsByTagName(string tag, Dormitory dorm)
         {
             var xmlDoc = new XmlDocument();
             XmlReader reader = XmlReader.Create(@"D:\Development\C#\Lab2\Lab2\Dormitory.xml");
@@ -64,7 +64,9 @@ namespace Lab2
             {
                 RecurseNodes(node, 0, sb);
             }
-            Form1.StrBuilder = sb;
+
+            return sb;
+            //Form1.StrBuilder = sb;
         }
     }
 }
