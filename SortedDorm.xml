@@ -1,3 +1,3 @@
 <Dormitory>
-  <Student FirstName="Andriy" LastName="Fonar" Faculty="Computer Science and Cybernetics" Specialization="Computer Science" Course="First" Room="803/3" WhenCheckedInto="09.2020" />
+  <Student FirstName="Yuriy" LastName="Poberezhnyi" Faculty="Computer Science and Cybernetics" Specialization="Computer Science" Course="Second" Room="233/2" WhenCheckedInto="02.2020" />
 </Dormitory>

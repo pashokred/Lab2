@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace Lab2
@@ -8,7 +8,6 @@ namespace Lab2
     {
         public List<Student> Analyse(Student student)
         {
-            
             var xmlReader = new XmlTextReader(@"D:\Development\C#\Lab2\Lab2\Dormitory.xml");
 
             List<Student> students = new List<Student>();
@@ -19,123 +18,63 @@ namespace Lab2
                 {
                     while (xmlReader.MoveToNextAttribute())
                     {
-                        
-                        #region var
-                        
-                        string firstName = "";
-                        string lastName = "";
-                        string faculty = "";
-                        string specialization = "";
-                        string course = "";
-                        string room = "";
-                        string whenCheckedInto = "";
-
-                        #endregion
+                        Student temp = new Student();
 
                         if (xmlReader.Name.Equals("FirstName") && (xmlReader.Value.Equals(student.FirstName) ||
-                                                                   student.FirstName == null))
+                                                                   student.FirstName.Equals(String.Empty)))
                         {
-                            firstName = xmlReader.Value;
+                            temp.FirstName = xmlReader.Value;
                             xmlReader.MoveToNextAttribute();
 
                             if (xmlReader.Name.Equals("LastName") && (xmlReader.Value.Equals(student.LastName) ||
-                                                                      student.LastName == null))
+                                                                      student.LastName.Equals(String.Empty)))
                             {
-                                lastName = xmlReader.Value;
+                                temp.LastName = xmlReader.Value;
                                 xmlReader.MoveToNextAttribute();
                                 if (xmlReader.Name.Equals("Faculty") && (xmlReader.Value.Equals(student.Faculty) ||
-                                                                         student.Faculty == null))
-                                {
-                                    
-                                    faculty = xmlReader.Value;
-                                   xmlReader.MoveToNextAttribute();
+                                                                         student.Faculty.Equals(String.Empty)))
+                                { 
+                                    temp.Faculty = xmlReader.Value; 
+                                    xmlReader.MoveToNextAttribute();
 
-                                   if (xmlReader.Name.Equals("Specialization") &&
+                                    if (xmlReader.Name.Equals("Specialization") &&
                                        (xmlReader.Value.Equals(student.Specialization) ||
-                                        student.Specialization == null))
-                                   {                
-                                       specialization = xmlReader.Value;
-                                       xmlReader.MoveToNextAttribute();
-                                       if (xmlReader.Name.Equals("Course") && (xmlReader.Value.Equals(student.Course) ||
-                                                                               student.Course == null))
-                                       {
-                                           course = xmlReader.Value;
-                                           xmlReader.MoveToNextAttribute();
-                                           if (xmlReader.Name.Equals("Room") && (xmlReader.Value.Equals(student.Room) ||
-                                                                                 student.Room == null))
-                                           {
-                                               room = xmlReader.Value;
-                                               xmlReader.MoveToNextAttribute();
+                                        student.Specialization.Equals(String.Empty)))
+                                    {                
+                                        temp.Specialization = xmlReader.Value;
+                                        xmlReader.MoveToNextAttribute();
+                                        if (xmlReader.Name.Equals("Course") && (xmlReader.Value.Equals(student.Course) ||
+                                                                               student.Course.Equals(String.Empty)))
+                                        {
+                                            temp.Course = xmlReader.Value;
+                                            xmlReader.MoveToNextAttribute();
+                                            if (xmlReader.Name.Equals("Room") && (xmlReader.Value.Equals(student.Room) ||
+                                                                                 student.Room.Equals(String.Empty)))
+                                            {
+                                                temp.Room = xmlReader.Value;
+                                                xmlReader.MoveToNextAttribute();
 
-                                               if (xmlReader.Name.Equals("WhenCheckedInto") &&
+                                                if (xmlReader.Name.Equals("WhenCheckedInto") &&
                                                    (xmlReader.Value.Equals(student.WhenCheckedInto) ||
-                                                    student.WhenCheckedInto == null))
-                                               {
-                                                   whenCheckedInto = xmlReader.Value;
-                                                   xmlReader.MoveToNextAttribute();
-                                               }
-                                           }
-                                       }
-                                   }
+                                                    student.WhenCheckedInto.Equals(String.Empty)))
+                                                {
+                                                    temp.WhenCheckedInto = xmlReader.Value;
+                                                    xmlReader.MoveToNextAttribute();
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-                        #region ifEmptyFill
-
-                        if (firstName != "" && lastName != "" && faculty != "" && specialization != "" && course != "" &&
-                            room != "" && whenCheckedInto != "")
+                        if (temp.FirstName != "" && temp.LastName != "" && temp.Faculty != "" && temp.Specialization != "" && temp.Course != "" &&
+                            temp.Room != "" && temp.WhenCheckedInto != "")
                         {
-                            Student newStudent = new Student();
-                            newStudent.FirstName = firstName;
-                            newStudent.LastName = lastName;
-                            newStudent.Faculty = faculty;
-                            newStudent.Specialization = specialization;
-                            newStudent.Course = course;
-                            newStudent.Room = room;
-                            newStudent.WhenCheckedInto = whenCheckedInto;
-                    
-                            students.Add(newStudent);
+                            students.Add(temp);
                         }
-
-                        #endregion
                     }
                 }
             }
-            
-            
-            /*
-            var sb = new StringBuilder();
-            var xmlReader = new XmlTextReader(@"D:\Development\C#\Lab2\Lab2\");
-
-            while (xmlReader.Read())
-            {
-                switch (xmlReader.NodeType)
-                {
-                    case XmlNodeType.XmlDeclaration:
-                    case XmlNodeType.Element:
-                    case XmlNodeType.Comment:
-                        sb.AppendFormat("{0}: {1} = {2}", xmlReader.NodeType,
-                            xmlReader.Name, xmlReader.Value);
-                        sb.AppendLine();
-                        break;
-                    case XmlNodeType.Text:
-                        sb.AppendFormat("- Value: {0}", xmlReader.Value);
-                        sb.AppendLine();
-                        break;
-                }
-
-                if (xmlReader.HasAttributes)
-                {
-                    while (xmlReader.MoveToNextAttribute())
-                    {
-                        sb.AppendFormat("- Attribute: {0} = {1}", xmlReader.Name,
-                            xmlReader.Value);
-                        sb.AppendLine();
-                    }
-                }
-            }
-            xmlReader.Close();
-            return new List<Student>() { };*/
             return students;
         }
     }

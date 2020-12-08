@@ -76,13 +76,6 @@ namespace Lab2
                 FillComboBox(node);
             }
         }
-
-        public static StringBuilder StrBuilder { get; set; }
-        public void FillTextBox()
-        {
-            TextBox.Text = StrBuilder.ToString();
-        }
-
         private void FillTextBox(List<Student> students)
         {
             foreach (var stud in students)
@@ -117,7 +110,7 @@ namespace Lab2
             
             if (LinqBtn.Checked)
             {
-                
+                analyser = new LinqToXmlAnalyse();
             }
             else if (DomBtn.Checked)
             {

@@ -2,6 +2,16 @@
 {
     public class Student
     {
+        public Student()
+        {
+            FirstName = "";
+            LastName = "";
+            Faculty = "";
+            Specialization = "";
+            Course = "";
+            Room = "";
+            WhenCheckedInto = "";
+        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Faculty { get; set; }
