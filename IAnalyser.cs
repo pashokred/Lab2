@@ -6,6 +6,6 @@ namespace Lab2
 {
     interface IAnalyser
     {
-        void Analyse(string tag, Dormitory dorm);
+        List<Student> Analyse(Student student);
     }
 }

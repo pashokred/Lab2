@@ -1,6 +1,6 @@
 ﻿namespace Lab2
 {
-    public class Dormitory
+    public class Student
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

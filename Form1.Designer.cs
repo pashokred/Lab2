@@ -44,7 +44,7 @@
             this.comBoxRoom = new System.Windows.Forms.ComboBox();
             this.comBoxCheckIn = new System.Windows.Forms.ComboBox();
             this.SaxBtn = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toHtml = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.TextBox = new System.Windows.Forms.RichTextBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -52,6 +52,7 @@
             this.DomBtn = new System.Windows.Forms.RadioButton();
             this.LinqBtn = new System.Windows.Forms.RadioButton();
             this.SearchBtn = new System.Windows.Forms.Button();
+            this.ClearButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FNchB
@@ -214,15 +215,16 @@
             this.SaxBtn.Text = "SAX";
             this.SaxBtn.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // toHtml
             // 
-            this.button1.Location = new System.Drawing.Point(250, 404);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(159, 34);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "To HTML";
-            this.button1.UseVisualStyleBackColor = true;
+            this.toHtml.Location = new System.Drawing.Point(158, 404);
+            this.toHtml.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.toHtml.Name = "toHtml";
+            this.toHtml.Size = new System.Drawing.Size(126, 34);
+            this.toHtml.TabIndex = 4;
+            this.toHtml.Text = "To HTML";
+            this.toHtml.UseVisualStyleBackColor = true;
+            this.toHtml.Click += new System.EventHandler(this.toHtml_Click);
             // 
             // label1
             // 
@@ -293,14 +295,25 @@
             // 
             // SearchBtn
             // 
-            this.SearchBtn.Location = new System.Drawing.Point(33, 404);
+            this.SearchBtn.Location = new System.Drawing.Point(18, 404);
             this.SearchBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SearchBtn.Name = "SearchBtn";
-            this.SearchBtn.Size = new System.Drawing.Size(159, 34);
+            this.SearchBtn.Size = new System.Drawing.Size(117, 34);
             this.SearchBtn.TabIndex = 4;
             this.SearchBtn.Text = "Search";
             this.SearchBtn.UseVisualStyleBackColor = true;
             this.SearchBtn.Click += new System.EventHandler(this.SearchBtn_Click);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.Location = new System.Drawing.Point(303, 405);
+            this.ClearButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(126, 34);
+            this.ClearButton.TabIndex = 4;
+            this.ClearButton.Text = "Clear table";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // Form1
             // 
@@ -310,7 +323,8 @@
             this.Controls.Add(this.TextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SearchBtn);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ClearButton);
+            this.Controls.Add(this.toHtml);
             this.Controls.Add(this.DomBtn);
             this.Controls.Add(this.LinqBtn);
             this.Controls.Add(this.SaxBtn);
@@ -335,6 +349,10 @@
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.Button ClearButton;
+
+        private System.Windows.Forms.Button toHtml;
+
         private System.Windows.Forms.RichTextBox TextBox;
 
         private System.Windows.Forms.ComboBox comBoxCheckIn;
@@ -356,7 +374,6 @@
         private System.Windows.Forms.CheckBox RMchB;
         private System.Windows.Forms.CheckBox CHINchB;
         private System.Windows.Forms.RadioButton SaxBtn;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;

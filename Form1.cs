@@ -5,10 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Xsl;
 
 namespace Lab2
 {
@@ -83,56 +85,21 @@ namespace Lab2
         
         private void SearchBtn_Click(object sender, EventArgs e)
         {
-            List<string> checkedBoxes = new List<string>();
-
-            foreach (var cb in Controls.OfType<CheckBox>().Where(x => x.Checked))
-                checkedBoxes.Add(cb.Text);
-
             _comboBoxes = new List<ComboBox>(){comBoxFn, comBoxLn, comBoxFac, comBoxSpec, comBoxCourse, comBoxRoom, comBoxCheckIn};
+            var checkBoxes = new List<CheckBox> {FNchB, LNchB, FACchB, SPECchB, CRSchB, RMchB, CHINchB};
+            var checkedBoxes = new List<string>();
             var checkedComboBoxes = new List<ComboBox>();
-            var dormitory = new Dormitory();
+            var student = new Student();
+            PropertyInfo[] propertyInfos = typeof(Student).GetProperties();
             
-            foreach (var checkedBox in checkedBoxes)
+            for (int i = 0; i < _comboBoxes.Count; ++i)
             {
-                if (checkedBox == "FirstName" && !checkedComboBoxes.Contains(comBoxFn)) {
-                    checkedComboBoxes.Add(comBoxFn);
-                    dormitory.FirstName = comBoxFn.SelectedItem.ToString();
-                }
-                else if (checkedBox == "LastName" && !checkedComboBoxes.Contains(comBoxLn))
+                if (checkBoxes[i].Checked)
                 {
-                    checkedComboBoxes.Add(comBoxLn);
-                    dormitory.LastName = comBoxLn.SelectedItem.ToString();
-                }
-                else if (checkedBox == "Faculty" && !checkedComboBoxes.Contains(comBoxFac))
-                {
-                    checkedComboBoxes.Add(comBoxFac);
-                    dormitory.Faculty = comBoxFac.SelectedItem.ToString();
-                }
-                else if (checkedBox == "Specialization" && !checkedComboBoxes.Contains(comBoxSpec))
-                {
-                    checkedComboBoxes.Add(comBoxSpec);
-                    dormitory.Specialization = comBoxSpec.SelectedItem.ToString();
-                }
-                else if (checkedBox == "Course" && !checkedComboBoxes.Contains(comBoxCourse))
-                {
-                    checkedComboBoxes.Add(comBoxCourse);
-                    dormitory.Course = comBoxCourse.SelectedItem.ToString();
-                }
-                else if (checkedBox == "Room" && !checkedComboBoxes.Contains(comBoxRoom))
-                {
-                    checkedComboBoxes.Add(comBoxRoom);
-                    dormitory.Room = comBoxRoom.SelectedItem.ToString();
-                }
-                else if (checkedBox == "WhenCheckedInto" && !checkedComboBoxes.Contains(comBoxCheckIn))
-                {
-                    checkedComboBoxes.Add(comBoxCheckIn);
-                    dormitory.WhenCheckedInto = comBoxCheckIn.SelectedItem.ToString();
+                    checkedComboBoxes.Add(_comboBoxes[i]);
+                    propertyInfos[i].SetValue(student, _comboBoxes[i].SelectedItem.ToString());
                 }
             }
-            
-            
-            
-            
             IAnalyser analyser = new DomAnalyse();
             
             if (LinqBtn.Checked)
@@ -145,15 +112,57 @@ namespace Lab2
             }
             else if (SaxBtn.Checked)
             {
+                analyser = new SaxAnalyse();
+            }
 
-            }
-            
-            foreach (var checkedBox in checkedBoxes)
+            List<Student> students = analyser.Analyse(student);
+            foreach (var stud in students)
             {
-                string tag = string.Concat(checkedBox.Where(c => !Char.IsWhiteSpace(c)));
-                analyser.Analyse(tag, dormitory);
-                FillTextBox();
+                TextBox.Text += $"First Name: {stud.FirstName}\n" +
+                                $"Last Name: {stud.LastName}\n" +
+                                $"Faculty: {stud.Faculty}\n" +
+                                $"Specialization: {stud.Specialization}\n" +
+                                $"Course: {stud.Course}\n" +
+                                $"Room: {stud.Room}\n" +
+                                $"When checked into: {stud.WhenCheckedInto}\n\n\n";
             }
+            CreateXmlFromChosen(students);
+        }
+
+        private void CreateXmlFromChosen(List<Student> students)
+        {
+            var xmlDoc = new XmlDocument();
+            XmlElement el = xmlDoc.CreateElement("Dormitory");
+            xmlDoc.AppendChild(el);
+            foreach (var student in students)
+            {
+                XmlElement childElement = xmlDoc.CreateElement("Student");
+                PropertyInfo[] propertyInfos = typeof(Student).GetProperties();
+                
+                for (int i = 0; i < propertyInfos.Length; ++i)
+                {
+                    XmlAttribute attribute = xmlDoc.CreateAttribute(propertyInfos[i].Name);
+                    attribute.Value = propertyInfos[i].GetValue(student).ToString();
+                    childElement.Attributes.Append(attribute);
+                }
+                el.AppendChild(childElement);
+            }
+            xmlDoc.Save(@"D:\Development\C#\Lab2\Lab2\SortedDorm.xml");
+        }
+        
+        private void toHtml_Click(object sender, EventArgs e)
+        {
+            XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
+            string path = @"D:\Development\C#\Lab2\Lab2\";
+            xslCompiledTransform.Load(path + "LilBoy.xslt");
+            string xmlPath = path + "SortedDorm.xml";
+            string htmlPath = path + "Dormitory.html";
+            xslCompiledTransform.Transform(xmlPath, htmlPath);
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            TextBox.Clear();
         }
     }
 }
