@@ -9,7 +9,7 @@ namespace Lab2
         private Student FillAttributes(XmlNode nod, Student student)
         {
             Student temp = new Student();
-                
+
             // Check all attributes of student, if there are suitable - change suitable attr
             foreach (XmlAttribute attribute in nod.Attributes)
             {

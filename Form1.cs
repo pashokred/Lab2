@@ -38,10 +38,6 @@ namespace Lab2
         {
             
         }
-        private void SPECchB_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void FillComboBox(XmlNode node)
         {
